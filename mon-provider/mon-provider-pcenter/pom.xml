@@ -36,12 +36,23 @@
             <artifactId>mon-common-datasource</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
         <!--spring cloud-->
         <!--eureka 服务治理框架, 类似的还有：consul, zookeeper-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <version>${springcloud.eureka.version}</version>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>${springcloud.starter.version}</version>
+        </dependency>
+        <!--配置文件加密工具-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>

@@ -24,7 +24,8 @@ public class KaptchaConfig {
         properties.put("kaptcha.border", "no");
         properties.put("kaptcha.textproducer.font.color", "blue");
         properties.put("kaptcha.textproducer.char.space", "5");
-        properties.put("kaptcha.textproducer.font.names","宋体,楷体"); //默认是Arial, Courier.有些服务器没安装此字体的话，生成的验证码图片会模糊
+        //默认是Arial, Courier.有些服务器没安装此字体的话，生成的验证码图片会模糊
+        properties.put("kaptcha.textproducer.font.names","宋体,楷体");
         //定制化
         properties.put("kaptcha.noise.impl","com.google.code.kaptcha.impl.NoNoise");
         properties.put("kaptcha.textproducer.font.size","24");

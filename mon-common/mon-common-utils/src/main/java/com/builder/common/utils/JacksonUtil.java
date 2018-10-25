@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 
 /***
  * JSON转换工具类
+ * @author builder34
  * */
 public class JacksonUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JacksonUtil.class);

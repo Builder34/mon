@@ -14,6 +14,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -36,13 +37,16 @@ import java.util.Map;
 public class SysLoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SysLoginController.class);
 
-    //kaptcha验证码
+    /**kaptcha验证码*/
     @Autowired
     private Producer producer;
     @Autowired
     private SysUserService sysUserService;
     @Autowired
     private SysUserTokenService sysUserTokenService;
+
+    @Autowired
+    DiscoveryClient discoveryClient;
 
     @RequestMapping("captcha.jpg")
     public void captcha(HttpServletResponse response) throws IOException{
@@ -92,5 +96,11 @@ public class SysLoginController {
     public R logout(){
         ShiroUtils.logout();
         return R.ok();
+    }
+
+    @GetMapping("/test.do")
+    public String dc(){
+        String services = "Services: " + discoveryClient.getServices();
+        return services;
     }
 }
