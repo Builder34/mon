@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.builder.common.entity.pcenter.SysUserEntity;
+import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

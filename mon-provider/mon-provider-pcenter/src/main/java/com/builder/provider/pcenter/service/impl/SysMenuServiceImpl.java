@@ -2,18 +2,22 @@ package com.builder.provider.pcenter.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.builder.common.entity.pcenter.SysMenuEntity;
+import com.builder.provider.api.pcenter.entity.SysMenuEntity;
 import com.builder.common.utils.PageUtils;
 import com.builder.common.utils.Query;
 import com.builder.common.utils.constant.Constant;
 import com.builder.common.utils.service.impl.BaseServiceImpl;
 import com.builder.provider.pcenter.dao.SysMenuDao;
 import com.builder.provider.pcenter.service.SysMenuService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +79,20 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         page = this.selectPage(page, ew);
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<GrantedAuthority> getPermissionListByUserId(long userId) {
+        List<SysMenuEntity> list = this.baseMapper.getPermissionListByUserId(userId);
+        if(list == null) {
+            return null;
+        }
+        List<GrantedAuthority> grantedAuthorityList = Lists.newArrayList();
+        list.forEach(item -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority(item.getUrl());
+            grantedAuthorityList.add(authority);
+        });
+        return grantedAuthorityList;
     }
 
 

@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.service;
 
-import com.builder.common.entity.pcenter.SysUserRoleEntity;
+import com.builder.provider.api.pcenter.entity.SysUserRoleEntity;
 import com.builder.common.utils.service.BaseService;
 
 /**

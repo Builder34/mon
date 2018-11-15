@@ -3,14 +3,14 @@
 
 <mapper namespace="com.builder.provider.pcenter.dao.SysMenuDao">
 
-    <select id="getNavMenuListAll" resultType="com.builder.common.entity.pcenter.SysMenuEntity">
+    <select id="getNavMenuListAll" resultType="com.builder.provider.api.pcenter.entity.SysMenuEntity">
         SELECT sm.menu_id,sm.parent_id,(SELECT `name` FROM sys_menu WHERE menu_id=sm.parent_id) as parent_name,
         sm.name,sm.icon,sm.type,sm.url,sm.perms,sm.order_num,sm.layer,sm.create_time,sm.update_time
         FROM sys_menu sm
         WHERE sm.parent_id = 0
         ORDER BY sm.order_num
     </select>
-    <select id="getMenuListAll" resultType="com.builder.common.entity.pcenter.SysMenuEntity">
+    <select id="getMenuListAll" resultType="com.builder.provider.api.pcenter.entity.SysMenuEntity">
         SELECT sm.menu_id,sm.parent_id,(SELECT `name` FROM sys_menu WHERE menu_id=sm.parent_id) as parent_name,
         sm.name,sm.icon,sm.type,sm.url,sm.perms,sm.order_num,sm.layer,sm.create_time,sm.update_time
         FROM sys_menu sm
@@ -20,7 +20,7 @@
 
 
     <!--获取第一层菜单id作为顶部导航栏-->
-    <select id="getNavMenuListByUserId" parameterType="java.lang.Long" resultType="com.builder.common.entity.pcenter.SysMenuEntity">
+    <select id="getNavMenuListByUserId" parameterType="java.lang.Long" resultType="com.builder.provider.api.pcenter.entity.SysMenuEntity">
         SELECT sm.menu_id,sm.parent_id,(SELECT `name` FROM sys_menu WHERE menu_id=sm.parent_id) as parent_name,
         sm.name,sm.icon,sm.type,sm.url,sm.perms,sm.order_num,sm.layer,sm.create_time,sm.update_time
         FROM sys_menu sm, sys_role_menu srm, sys_user_role sur
@@ -33,7 +33,7 @@
 
 
     <!--根据顶层菜单id获取菜单列表-->
-    <select id="getMenuList" resultType="com.builder.common.entity.pcenter.SysMenuEntity">
+    <select id="getMenuList" resultType="com.builder.provider.api.pcenter.entity.SysMenuEntity">
         SELECT sm.menu_id,sm.parent_id,(SELECT `name` FROM sys_menu WHERE menu_id=sm.parent_id) as parent_name,
         sm.name,sm.icon,sm.type,sm.url,sm.perms,sm.order_num,sm.layer,sm.create_time,sm.update_time
         FROM sys_menu sm, sys_role_menu srm, sys_user_role sur
@@ -46,6 +46,16 @@
 
     <select id="getCurrentLayer" resultType="java.lang.Integer">
         SELECT layer+1 FROM sys_menu WHERE menu_id=#{parentId}
+    </select>
+
+    <select id="getPermissionListByUserId" resultType="com.builder.provider.api.pcenter.entity.SysMenuEntity">
+        SELECT sm.menu_id,sm.parent_id,(SELECT `name` FROM sys_menu WHERE menu_id=sm.parent_id) as parent_name,
+        sm.name,sm.icon,sm.type,sm.url,sm.perms,sm.order_num,sm.layer,sm.create_time,sm.update_time
+        FROM sys_menu sm, sys_role_menu srm, sys_user_role sur
+        WHERE sur.role_id = srm.role_id
+        AND srm.menu_id = sm.menu_id
+        AND sur.user_id = #{userId}
+        ORDER BY sm.order_num
     </select>
 
 </mapper>

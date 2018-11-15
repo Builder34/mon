@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.builder.common.entity.pcenter.SysRoleEntity;
+import com.builder.provider.api.pcenter.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

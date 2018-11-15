@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.service.impl;
 
 
-import com.builder.common.entity.pcenter.SysDeptEntity;
+import com.builder.provider.api.pcenter.entity.SysDeptEntity;
 import com.builder.common.utils.service.impl.BaseServiceImpl;
 import com.builder.provider.pcenter.dao.SysDeptDao;
 import com.builder.provider.pcenter.service.SysDeptService;

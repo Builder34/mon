@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>mon权限中心模块</description>
+    <description>mon权限中心服务提供者模块</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,17 +23,27 @@
     <dependencies>
         <dependency>
             <groupId>com.builder</groupId>
+            <artifactId>mon-provider-api-pcenter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.builder</groupId>
+            <artifactId>mon-common-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.builder</groupId>
             <artifactId>mon-common-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.builder</groupId>
-            <artifactId>mon-common-entity</artifactId>
+            <artifactId>mon-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.builder</groupId>
-            <artifactId>mon-common-datasource</artifactId>
+            <artifactId>mon-common-security</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -41,12 +51,52 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
         <!--spring cloud-->
         <!--eureka 服务治理框架, 类似的还有：consul, zookeeper-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
             <version>${springcloud.starter.version}</version>
+        </dependency>
+        <!--权限认证框架-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <version>${springcloud.oauth2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${springcloud.jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+        <!--分布式服务跟踪框架 spring cloud sleuth, zipkin-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <version>${sleuth.zipkin.version}</version>
         </dependency>
         <!--配置文件加密工具-->
         <dependency>

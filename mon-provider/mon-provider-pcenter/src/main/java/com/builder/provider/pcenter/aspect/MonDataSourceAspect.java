@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.aspect;
 
-import com.builder.common.datasources.aspect.DataSourceAspect;
+import com.builder.common.core.aspect.DataSourceAspect;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.builder.common.entity.pcenter.SysMenuEntity;
+import com.builder.provider.api.pcenter.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -49,4 +49,10 @@ public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
      * */
     Integer getCurrentLayer(@Param("parentId") Long parentId);
 
+    /**
+     * 配置spring security oauth2返回权限列表数据
+     * @param userId  用户id
+     * @return 权限菜单数据
+     * */
+    List<SysMenuEntity> getPermissionListByUserId(Long userId);
 }

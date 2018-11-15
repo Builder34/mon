@@ -1,7 +1,6 @@
 package com.builder.provider.pcenter.controller;
 
-import com.builder.common.entity.pcenter.SysUserEntity;
-import com.builder.provider.pcenter.util.ShiroUtils;
+import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,10 +14,12 @@ public class BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
     protected SysUserEntity getCurrentUser(){
-        return (SysUserEntity) ShiroUtils.getSubject().getPrincipal();
+        //TODO:
+        return null;
     }
 
     protected Long getCurrentUserId(){
         return getCurrentUser().getUserId();
     }
+
 }

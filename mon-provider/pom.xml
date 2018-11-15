@@ -13,11 +13,12 @@
 
     <modules>
         <module>mon-provider-pcenter</module>
+        <module>mon-provider-wcenter</module>
     </modules>
 
     <packaging>pom</packaging>
 
-    <name>${parent.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>mon服务提供者模块</description>
 
     <profiles>

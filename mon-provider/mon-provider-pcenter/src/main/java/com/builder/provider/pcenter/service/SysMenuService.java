@@ -1,8 +1,9 @@
 package com.builder.provider.pcenter.service;
 
-import com.builder.common.entity.pcenter.SysMenuEntity;
+import com.builder.provider.api.pcenter.entity.SysMenuEntity;
 import com.builder.common.utils.PageUtils;
 import com.builder.common.utils.service.BaseService;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 import java.util.Map;
@@ -41,4 +42,11 @@ public interface SysMenuService extends BaseService<SysMenuEntity> {
      * 分页查询
      * */
     PageUtils selectPage(Map<String, Object> params);
+
+    /**
+     * 配合spring security oauth2返回权限列表数据
+     * @param userId 用户id
+     * @return 权限列表
+     * */
+    List<GrantedAuthority> getPermissionListByUserId(long userId);
 }

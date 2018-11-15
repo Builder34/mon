@@ -14,12 +14,24 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>mon-common-datasource</module>
+        <module>mon-common-base</module>
         <module>mon-common-utils</module>
-        <module>mon-common-entity</module>
+        <module>mon-common-core</module>
     </modules>
 
     <name>mon-common</name>
     <description>mon公共模块</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${common-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+    </dependencies>
 </project>

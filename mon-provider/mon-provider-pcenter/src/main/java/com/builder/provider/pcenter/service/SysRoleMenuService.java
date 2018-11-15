@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.service;
 
-import com.builder.common.entity.pcenter.SysRoleMenuEntity;
+import com.builder.provider.api.pcenter.entity.SysRoleMenuEntity;
 import com.builder.common.utils.service.BaseService;
 
 /**

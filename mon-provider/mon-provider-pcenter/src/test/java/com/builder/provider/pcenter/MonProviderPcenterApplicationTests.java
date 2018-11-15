@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter;
 
-import com.builder.common.entity.pcenter.SysMenuEntity;
+import com.builder.provider.api.pcenter.entity.SysMenuEntity;
 import com.builder.common.utils.JacksonUtil;
 import com.builder.common.utils.PageUtils;
 import com.builder.provider.pcenter.service.SysMenuService;

@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter;
 
-import com.builder.common.datasources.DataSourceNames;
-import com.builder.common.datasources.annotation.DataSource;
+import com.builder.common.core.DataSourceNames;
+import com.builder.common.core.annotation.DataSource;
 import com.builder.common.utils.PageUtils;
 import com.builder.provider.pcenter.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;

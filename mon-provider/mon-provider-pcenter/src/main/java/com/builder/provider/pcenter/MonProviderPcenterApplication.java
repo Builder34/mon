@@ -1,13 +1,14 @@
 package com.builder.provider.pcenter;
 
-import com.builder.common.datasources.config.DynamicDataSourceConfig;
-import com.builder.common.datasources.config.MybatisPlusConfig;
+import com.builder.common.core.config.DynamicDataSourceConfig;
+import com.builder.common.core.config.MybatisPlusConfig;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableEncryptableProperties
 @EnableTransactionManagement
 @EnableDiscoveryClient
+@EnableHystrix
 @ComponentScan(basePackages = "com.builder")
 /**
  * 权限中心服务App
