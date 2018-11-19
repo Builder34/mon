@@ -29,6 +29,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <jdk.used.version>1.8</jdk.used.version>
+        <spring.version>5.0.7.RELEASE</spring.version>
         <springboot.version>2.0.3.RELEASE</springboot.version>
         <springcloud.version>Finchley.RELEASE</springcloud.version>
         <springcloud.starter.version>1.4.5.RELEASE</springcloud.starter.version>

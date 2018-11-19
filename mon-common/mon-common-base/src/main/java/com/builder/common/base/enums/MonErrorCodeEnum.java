@@ -14,7 +14,8 @@ public enum MonErrorCodeEnum {
     GL999120(999120, "token解析异常"),
 
     //权限中心
-    PCENTER100400(100400, "页面已过期,请重新登录")
+    PCENTER100400(100400, "页面已过期,请重新登录"),
+    PCENTER100411(100411, "验证token失败")
 
     //订单中心
 

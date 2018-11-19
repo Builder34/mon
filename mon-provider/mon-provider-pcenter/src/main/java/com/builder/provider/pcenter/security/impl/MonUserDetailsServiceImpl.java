@@ -1,5 +1,6 @@
 package com.builder.provider.pcenter.security.impl;
 
+import com.builder.common.utils.JacksonUtil;
 import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import com.builder.provider.pcenter.service.SysMenuService;
 import com.builder.provider.pcenter.service.SysUserService;
@@ -20,7 +21,6 @@ import java.util.List;
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-05 17:32:45
  */
-@Component
 @Slf4j
 public class MonUserDetailsServiceImpl implements UserDetailsService {
 
@@ -38,7 +38,7 @@ public class MonUserDetailsServiceImpl implements UserDetailsService {
         }
         SysUserEntity user = list.get(0);
         List<GrantedAuthority> authorities = sysMenuService.getPermissionListByUserId(user.getUserId());
-        log.debug("==============sysUserEntity: {}", user);
+        log.debug("==============user: {}", JacksonUtil.encode2(user));
         return new MonUserDetails(user, authorities);
     }
 }

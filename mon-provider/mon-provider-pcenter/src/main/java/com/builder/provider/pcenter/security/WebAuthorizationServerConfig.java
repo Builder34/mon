@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.security;
 
-import com.builder.provider.pcenter.security.impl.RestClientUserDetailsServiceImpl;
+import com.builder.provider.pcenter.security.impl.RestClientDetailsServiceImpl;
 import com.builder.provider.pcenter.security.handler.WebLogoutSuccessHandler;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class WebAuthorizationServerConfig extends AuthorizationServerConfigurerA
     @Resource
     private UserDetailsService userDetailsService;
     @Resource
-    private RestClientUserDetailsServiceImpl restClientUserDetailsService;
+    private RestClientDetailsServiceImpl restClientUserDetailsService;
 
     @Autowired
     private AuthenticationManager authenticationManager;

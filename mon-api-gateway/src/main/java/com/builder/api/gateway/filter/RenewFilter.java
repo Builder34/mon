@@ -1,6 +1,6 @@
 package com.builder.api.gateway.filter;
 
-import com.builder.api.gateway.util.Constant;
+import com.builder.common.base.constant.SecurityConstants;
 import com.builder.common.base.enums.MonErrorCodeEnum;
 import com.builder.common.base.exception.BusinessException;
 import com.netflix.zuul.ZuulFilter;
@@ -60,7 +60,7 @@ public class RenewFilter extends ZuulFilter {
 
 	private void doSomething(RequestContext requestContext) {
 		HttpServletRequest request = requestContext.getRequest();
-		String token = StringUtils.substringAfter(request.getHeader(HttpHeaders.AUTHORIZATION), Constant.BEARER_TOKEN_TYPE);
+		String token = StringUtils.substringAfter(request.getHeader(HttpHeaders.AUTHORIZATION), SecurityConstants.BEARER_TOKEN_TYPE);
 		if (StringUtils.isBlank(token)) {
 			return;
 		}

@@ -1,15 +1,15 @@
 package com.builder.api.gateway.filter;
 
-import com.builder.api.gateway.util.Constant;
-import com.builder.api.gateway.util.MonRequestUtil;
 import com.builder.common.base.constant.SecurityConstants;
 import com.builder.common.base.enums.MonErrorCodeEnum;
 import com.builder.common.base.exception.BusinessException;
+import com.builder.common.base.utils.RequestBaseUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -78,15 +78,16 @@ public class AuthHeaderFilter extends ZuulFilter {
     private void doSomething(RequestContext requestContext) throws ZuulException {
         HttpServletRequest request = requestContext.getRequest();
         String requestURI = request.getRequestURI();
+        log.info("==> getHeaderNames: {}", ToStringBuilder.reflectionToString(request.getHeaderNames()));
         if (OPTIONS.equalsIgnoreCase(request.getMethod()) || !requestURI.contains(AUTH_PATH)
                 || !requestURI.contains(LOGOUT_URI) ) {
             return;
         }
-        String authHeader = MonRequestUtil.getAuthHeader(request);
+        String authHeader = RequestBaseUtils.getAuthHeader(request);
         if (StringUtils.isBlank(authHeader)) {
             throw new ZuulException("刷新页面重试", 403, "check token fail");
         }
-        if (authHeader.startsWith(Constant.BEARER_TOKEN_TYPE)) {
+        if (authHeader.startsWith(SecurityConstants.BEARER_TOKEN_TYPE)) {
             requestContext.addZuulRequestHeader(HttpHeaders.AUTHORIZATION, authHeader);
             log.info("authHeader={}", authHeader);
             //传递给后续微服务

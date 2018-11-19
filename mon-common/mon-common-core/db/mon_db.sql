@@ -118,15 +118,15 @@ CREATE TABLE `sys_user_role` (
 -- 初始化数据
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_menu` VALUES (1, 0, '权限中心', NULL, NULL, 0, 'ios-lock', 0, NOW(), NOW(), 1, 1, 0);
-INSERT INTO `sys_menu` VALUES (2, 0, '用户中心', NULL, NULL, 0, 'ios-contacts', 1, NOW(), NOW(), 1, 1, 0);
-INSERT INTO `sys_menu` VALUES (3, 0, '商品中心', NULL, NULL, 0, 'ios-basket', 2, NOW(), NOW(), 1, 1, 0);
-INSERT INTO `sys_menu` VALUES (4, 0, '订单中心', NULL, NULL, 0, 'ios-paper', 3, NOW(), NOW(), 1, 1, 0);
-INSERT INTO `sys_menu` VALUES (5, 0, '数据中心', NULL, NULL, 0, 'ios-stats', 4, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_menu` VALUES (1, 0, '权限中心', '/pcenter', NULL, 0, 'ios-lock', 0, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_menu` VALUES (2, 0, '用户中心', '/ucenter', NULL, 0, 'ios-contacts', 1, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_menu` VALUES (3, 0, '商品中心', '/wcenter', NULL, 0, 'ios-basket', 2, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_menu` VALUES (4, 0, '订单中心', '/ocenter', NULL, 0, 'ios-paper', 3, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_menu` VALUES (5, 0, '数据中心', '/dcenter', NULL, 0, 'ios-stats', 4, NOW(), NOW(), 1, 1, 0);
 INSERT INTO `sys_menu` VALUES (6, 1, '菜单管理', '/pcenter/menu', NULL, 1, 'md-paper', 0, NOW(), NOW(), 1, 1, 1);
 INSERT INTO `sys_menu` VALUES (7, 1, '角色管理', '/pcenter/role', NULL, 1, 'ios-shirt', 1, NOW(), NOW(), 1, 1, 1);
 INSERT INTO `sys_menu` VALUES (8, 1, '部门管理', '/pcenter/dept', NULL, 1, 'ios-cube', 2, NOW(), NOW(), 1, 1, 1);
-INSERT INTO `sys_menu` VALUES (9, 1, '系统用户管理', '', NULL, 1, 'ios-contact', 3, NOW(), NOW(), 1, 1, 1);
+INSERT INTO `sys_menu` VALUES (9, 1, '系统用户管理', '/pcenter/sysuser', '', 1, 'ios-contact', 3, NOW(), NOW(), 1, 1, 1);
 INSERT INTO `sys_menu` VALUES (10, 9, '系统用户', '/pcenter/sysuser/user', NULL, 2, 'md-person-add', 0, NOW(), NOW(), 1, 1, 2);
 INSERT INTO `sys_menu` VALUES (11, 9, '权限设置', '/pcenter/sysuser/permit', NULL, 2, 'md-shuffle', 1, NOW(), NOW(), 1, 1, 2);
 INSERT INTO `sys_menu` VALUES (12, 1, '代码生成', '/pcenter/code', NULL, 1, 'md-hammer', 4, NOW(), NOW(), 1, 1, 1);

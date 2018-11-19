@@ -1,22 +1,25 @@
 package com.builder.provider.pcenter.security.authentication;
 
+import com.builder.provider.pcenter.security.impl.MonUserDetailsServiceImpl;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * MonWebSecurityConfig
+ * AuthenticationBeanConfig
  *
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-04 00:30:17
  */
 @Configuration
-public class MonWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class AuthenticationBeanConfig extends WebSecurityConfigurerAdapter {
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -26,8 +29,19 @@ public class MonWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //return new BCryptPasswordEncoder();
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return new BCryptPasswordEncoder();
+        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+    /**
+     * 默认认证器
+     *
+     * @return user details service
+     */
+    @Bean
+    @ConditionalOnMissingBean(UserDetailsService.class)
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new MonUserDetailsServiceImpl();
     }
 
     @Override

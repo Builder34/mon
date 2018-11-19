@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
- * RestClientUserDetailsServiceImpl
+ * RestClientDetailsServiceImpl
  *
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-13 17:06:15
  */
 @Slf4j
 @Component("restClientDetailsService")
-public class RestClientUserDetailsServiceImpl implements ClientDetailsService {
+public class RestClientDetailsServiceImpl implements ClientDetailsService {
 
     private ClientDetailsService clientDetailsService;
     @Autowired
