@@ -9,12 +9,12 @@ package com.builder.common.base.enums;
 public enum MonErrorCodeEnum {
 
     //全局
-    GL999401(999401, "无权限访问"),
     GL999110(999110, "参数异常"),
-    GL999120(999120, "token解析异常"),
 
     //权限中心
     PCENTER100400(100400, "页面已过期,请重新登录"),
+    PCENTER100401(999401, "无权限访问"),
+    PCENTER100410(100410, "token解析异常"),
     PCENTER100411(100411, "验证token失败")
 
     //订单中心

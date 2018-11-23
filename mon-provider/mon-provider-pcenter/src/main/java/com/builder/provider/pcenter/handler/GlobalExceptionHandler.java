@@ -71,6 +71,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R unAuthorizedException(AccessDeniedException e) {
         log.error("无权限访问={}", e.getMessage(), e);
-        return R.error(MonErrorCodeEnum.GL999401.code(), MonErrorCodeEnum.GL999401.msg());
+        return R.error(MonErrorCodeEnum.PCENTER100401.code(), MonErrorCodeEnum.PCENTER100401.msg());
     }
 }

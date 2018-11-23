@@ -1,5 +1,6 @@
 package com.builder.provider.pcenter.security;
 
+import com.builder.provider.pcenter.captcha.config.CaptchaSecurityConfig;
 import com.builder.provider.pcenter.security.authentication.FormAuthenticationConfig;
 import com.builder.provider.pcenter.security.authorize.AuthorizeConfigManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,15 @@ public class WebResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler webAccessDeniedHandler;
     @Autowired
-    protected AuthenticationSuccessHandler webAuthenticationSuccessHandler;
+    protected AuthenticationSuccessHandler monAuthenticationSuccessHandler;
     @Autowired
-    protected AuthenticationFailureHandler webAuthenticationFailureHandler;
+    protected AuthenticationFailureHandler monAuthenticationFailureHandler;
     @Autowired
     private AuthorizeConfigManager authorizeConfigManager;
     @Autowired
     private FormAuthenticationConfig formAuthenticationConfig;
+    @Autowired
+    private CaptchaSecurityConfig captchaSecurityConfig;
 
 //    @Resource
 //    private DataSource dataSource;
@@ -62,7 +65,11 @@ public class WebResourceServerConfig extends ResourceServerConfigurerAdapter {
         formAuthenticationConfig.configure(http);
 
         http.headers().frameOptions().disable();
-        http.exceptionHandling().accessDeniedHandler(webAccessDeniedHandler)
+        http.apply(captchaSecurityConfig)
+                .and()
+                .headers().frameOptions()
+                .and()
+                .exceptionHandling().accessDeniedHandler(webAccessDeniedHandler)
                 .and()
                 .csrf().disable();
 

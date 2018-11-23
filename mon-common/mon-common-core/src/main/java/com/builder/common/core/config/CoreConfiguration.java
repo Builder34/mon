@@ -1,6 +1,7 @@
 package com.builder.common.core.config;
 
 import com.builder.common.core.security.interceptor.AuthTokenInterceptor;
+import com.builder.common.core.security.interceptor.SqlLogInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -25,8 +26,13 @@ public class CoreConfiguration {
     }
 
     @Bean
+    public SqlLogInterceptor sqlLogInterceptor() {
+        return new SqlLogInterceptor();
+    }
+
+    @Bean
     @ConditionalOnMissingBean(HandlerInterceptor.class)
-    @ConditionalOnProperty(prefix = "mon.token.interceptor", name = "enable", havingValue = "true")
+    @ConditionalOnProperty(prefix = "mon.token.interceptor", name = "enable", havingValue = "true", matchIfMissing = true)
     public AuthTokenInterceptor authTokenInterceptor() {
         return new AuthTokenInterceptor();
     }

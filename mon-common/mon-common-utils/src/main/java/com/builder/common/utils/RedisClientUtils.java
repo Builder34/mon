@@ -1,6 +1,5 @@
 package com.builder.common.utils;
 
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -29,13 +28,12 @@ public class RedisClientUtils {
     private SetOperations<String, Object> setOperations;
     @Autowired
     private ZSetOperations<String, Object> zSetOperations;
-    /**  默认过期时长，单位：秒 */
-    public final static long DEFAULT_EXPIRE = 60 * 60 * 24;  //1天
+    /**  1天的过期时长，单位：秒  */
+    public final static long DEFAULT_EXPIRE = 60 * 60 * 24;
     /**  1个月的过期时长，单位：秒 */
-    public final static long ONE_MONTH_EXPIRE = 60 * 60 * 24 * 30;  //1个月
+    public final static long ONE_MONTH_EXPIRE = 60 * 60 * 24 * 30;
     /**  不设置过期时长 */
     public final static long NOT_EXPIRE = -1;
-    private final static Gson gson = new Gson();
 
     public void set(String key, Object value, long expire){
         valueOperations.set(key, toJson(value));
@@ -89,14 +87,14 @@ public class RedisClientUtils {
                 object instanceof Double || object instanceof Boolean || object instanceof String){
             return String.valueOf(object);
         }
-        return gson.toJson(object);
+        return JacksonUtil.encode2(object);
     }
 
     /**
      * JSON数据，转成Object
      */
     private <T> T fromJson(String json, Class<T> clazz){
-        return gson.fromJson(json, clazz);
+        return JacksonUtil.decode2(json, clazz);
     }
 
 }

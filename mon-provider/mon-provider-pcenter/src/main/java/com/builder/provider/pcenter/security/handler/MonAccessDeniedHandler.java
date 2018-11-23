@@ -22,13 +22,13 @@ import java.io.IOException;
  */
 @Slf4j
 @Configuration
-public class WebAccessDeniedHandler implements AccessDeniedHandler {
+public class MonAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException {
         log.error("处理权限异常，e={}", e);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(GlobalConstant.HTTP_RESPONSE_CONTENT_TYPE);
-        response.getWriter().write(JacksonUtil.encode2(R.error(MonErrorCodeEnum.GL999401.code(),MonErrorCodeEnum.GL999401.msg())));
+        response.getWriter().write(JacksonUtil.encode2(R.error(MonErrorCodeEnum.PCENTER100401.code(),MonErrorCodeEnum.PCENTER100401.msg())));
     }
 }

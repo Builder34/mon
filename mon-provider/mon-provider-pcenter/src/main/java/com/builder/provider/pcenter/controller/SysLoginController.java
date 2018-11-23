@@ -1,5 +1,6 @@
 package com.builder.provider.pcenter.controller;
 
+import com.builder.common.core.security.NoNeedAccessAuthentication;
 import com.builder.common.utils.R;
 import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import com.builder.provider.pcenter.form.SysLoginForm;
@@ -90,6 +91,7 @@ public class SysLoginController {
     }
 
     @GetMapping("/test.do")
+    @NoNeedAccessAuthentication
     public String dc(){
         String services = "Services: " + discoveryClient.getServices();
         return services;

@@ -23,14 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * WebAuthenticationSuccessHandler 认证成功处理器
+ * MonAuthenticationSuccessHandler 认证成功处理器
  *
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-14 13:53:12
  */
 @Slf4j
-@Component("webAuthenticationSuccessHandler")
-public class WebAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+@Component("monAuthenticationSuccessHandler")
+public class MonAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     private static final String BEARER_TOKEN_TYPE = "Basic ";
 
     @Resource
@@ -51,7 +51,7 @@ public class WebAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
         if(clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId对应的配置信息不存在: "+clientId);
-        }else if(StringUtils.equals(clientSecret, clientDetails.getClientSecret())){
+        }else if(!StringUtils.equals(clientSecret, clientDetails.getClientSecret())){
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配: "+clientSecret);
         }
         TokenRequest tokenRequest = new TokenRequest(Maps.newHashMap(), clientId, clientDetails.getScope(), "custom");
@@ -64,6 +64,6 @@ public class WebAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
         response.setContentType(GlobalConstant.HTTP_RESPONSE_CONTENT_TYPE);
         response.getWriter().write(JacksonUtil.encode2(R.ok().put("token", token)));
 
-        log.info("认证通过，登录成功，返回响应token: {}", token.getValue());
+        log.info("认证通过，登录成功...");
     }
 }

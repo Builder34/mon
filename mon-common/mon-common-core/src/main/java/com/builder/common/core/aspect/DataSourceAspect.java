@@ -10,17 +10,19 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
 /**
- * 多数据源，切面处理类 (需要在各自模块extends此类，并@Component实例化此切面类)
+ * 多数据源，切面处理类
  * @author Builder34
  * @email lcbiao34@gmail.com
  * @date 2018-08-04 22:20:22
  */
 @Aspect
 @Order(-1)
+@Component
 public class DataSourceAspect{
     protected Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
     private ThreadLocal<Long> startTime = new ThreadLocal<>();

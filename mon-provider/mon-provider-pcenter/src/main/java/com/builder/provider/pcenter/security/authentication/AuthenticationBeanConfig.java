@@ -30,7 +30,6 @@ public class AuthenticationBeanConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
     /**
      * 默认认证器

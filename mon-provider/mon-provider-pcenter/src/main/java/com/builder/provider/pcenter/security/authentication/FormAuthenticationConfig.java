@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 public class FormAuthenticationConfig {
 
 
-    protected final AuthenticationSuccessHandler webAuthenticationSuccessHandler;
-    protected final AuthenticationFailureHandler webAuthenticationFailureHandler;
+    protected final AuthenticationSuccessHandler monAuthenticationSuccessHandler;
+    protected final AuthenticationFailureHandler monAuthenticationFailureHandler;
 
     @Autowired
-    public FormAuthenticationConfig(AuthenticationSuccessHandler webAuthenticationSuccessHandler, AuthenticationFailureHandler webAuthenticationFailureHandler) {
-        this.webAuthenticationSuccessHandler = webAuthenticationSuccessHandler;
-        this.webAuthenticationFailureHandler = webAuthenticationFailureHandler;
+    public FormAuthenticationConfig(AuthenticationSuccessHandler authenticationSuccessHandler, AuthenticationFailureHandler authenticationFailureHandler) {
+        this.monAuthenticationSuccessHandler = authenticationSuccessHandler;
+        this.monAuthenticationFailureHandler = authenticationFailureHandler;
     }
 
     /**
@@ -37,8 +37,9 @@ public class FormAuthenticationConfig {
         http.formLogin()
                 .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
                 .loginProcessingUrl(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM)
-                .successHandler(webAuthenticationSuccessHandler)
-                .failureHandler(webAuthenticationFailureHandler);
+                .usernameParameter(SecurityConstants.DEFAULT_SIGN_IN_FORM_PARAM_USERNAME)
+                .successHandler(monAuthenticationSuccessHandler)
+                .failureHandler(monAuthenticationFailureHandler);
     }
 
 }

@@ -1,10 +1,11 @@
 package com.builder.provider.pcenter.controller;
 
+import com.builder.common.core.dto.LoginAuthDto;
 import com.builder.provider.api.pcenter.entity.SysMenuEntity;
 import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import com.builder.common.utils.PageUtils;
 import com.builder.common.utils.R;
-import com.builder.provider.pcenter.controller.BaseController;
+import com.builder.common.core.BaseController;
 import com.builder.provider.pcenter.service.SysMenuService;
 import com.builder.provider.pcenter.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,9 @@ public class SysUserController extends BaseController {
      * */
     @RequestMapping("/my")
     public R info(){
-        SysUserEntity user = getCurrentUser();
-        //清空密码相关的信息
-        user.setPassword("");
-        user.setSalt("");
+        LoginAuthDto user = getCurrentUser();
         List<SysMenuEntity> navMenuList= sysMenuService.getNavMenuListByUserId(getCurrentUserId());
-        R result = R.ok().put("user", getCurrentUser());
+        R result = R.ok().put("user", user);
         result.put("navMenus", navMenuList);
         return result;
     }

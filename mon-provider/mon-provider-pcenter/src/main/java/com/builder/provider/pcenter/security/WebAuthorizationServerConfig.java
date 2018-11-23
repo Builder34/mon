@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.security;
 
 import com.builder.provider.pcenter.security.impl.RestClientDetailsServiceImpl;
-import com.builder.provider.pcenter.security.handler.WebLogoutSuccessHandler;
+import com.builder.provider.pcenter.security.handler.MonLogoutSuccessHandler;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * MonAuthorizationServerConfig web端授权服务配置
+ * WebAuthorizationServerConfig web端授权服务配置
  *
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-02 10:49:45
@@ -79,6 +79,6 @@ public class WebAuthorizationServerConfig extends AuthorizationServerConfigurerA
      * */
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler() {
-        return new WebLogoutSuccessHandler();
+        return new MonLogoutSuccessHandler();
     }
 }

@@ -1,5 +1,6 @@
 package com.builder.provider.pcenter.security.properties;
 
+import com.builder.provider.pcenter.security.properties.captcha.CaptchaProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,15 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "mon.security")
 @Data
-public class SecurityProperties {
+public class  SecurityProperties {
 
     /**
      * OAuth2认证服务器配置
      */
     private OAuth2Properties oauth2 = new OAuth2Properties();
+
+    /**
+     * 验证码配置
+     * */
+    private CaptchaProperties captcha = new CaptchaProperties();
 }

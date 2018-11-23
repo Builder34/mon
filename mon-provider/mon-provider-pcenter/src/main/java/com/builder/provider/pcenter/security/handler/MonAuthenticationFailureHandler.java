@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * WebAuthenticationFailureHandler 认证失败处理器
+ * MonAuthenticationFailureHandler 认证失败处理器
  *
  * @author <a href="mailto:lcbiao34@gmail.com">Builder34</a>
  * @date 2018-11-14 13:59:07
  */
 @Slf4j
-@Component("webAuthenticationFailureHandler")
-public class WebAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@Component("monAuthenticationFailureHandler")
+public class MonAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {

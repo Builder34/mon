@@ -82,7 +82,7 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"status\": "+ MonErrorCodeEnum.GL999120.code() +", \"message\": \""+MonErrorCodeEnum.GL999120.msg()+"\"}");
+        response.getWriter().write("{\"status\": "+ MonErrorCodeEnum.PCENTER100411.code() +", \"message\": \""+MonErrorCodeEnum.PCENTER100411.msg()+"\"}");
         response.flushBuffer();
     }
 

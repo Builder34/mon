@@ -36,6 +36,10 @@ public interface SecurityConstants {
      */
     String DEFAULT_SIGN_IN_PROCESSING_URL_FORM = "/auth/form";
     /**
+     * 设置loadUserByUsername(String username)方法中username的表单请求参数名，默认是username
+     * */
+    String DEFAULT_SIGN_IN_FORM_PARAM_USERNAME = "username";
+    /**
      * 默认的手机验证码登录请求处理url
      */
     String DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE = "/auth/mobile";
@@ -46,15 +50,15 @@ public interface SecurityConstants {
     /**
      * 验证图片验证码时，http请求中默认的携带图片验证码信息的参数的名称
      */
-    String DEFAULT_PARAMETER_NAME_CODE_IMAGE = "imageCode";
+    String DEFAULT_PARAMETER_NAME_CAPTCHA_IMAGE = "image";
     /**
      * 验证短信验证码时，http请求中默认的携带短信验证码信息的参数的名称
      */
-    String DEFAULT_PARAMETER_NAME_CODE_SMS = "smsCode";
+    String DEFAULT_PARAMETER_NAME_CAPTCHA_SMS = "sms";
     /**
      * 验证邮箱验证码时，http请求中默认的携带短信验证码信息的参数的名称
      */
-    String DEFAULT_PARAMETER_NAME_CODE_EMAIL = "emailCode";
+    String DEFAULT_PARAMETER_NAME_CAPTCHA_EMAIL = "email";
     /**
      * 发送短信验证码 或 验证短信验证码时，传递手机号的参数的名称
      */

@@ -78,9 +78,8 @@ public class AuthHeaderFilter extends ZuulFilter {
     private void doSomething(RequestContext requestContext) throws ZuulException {
         HttpServletRequest request = requestContext.getRequest();
         String requestURI = request.getRequestURI();
-        log.info("==> getHeaderNames: {}", ToStringBuilder.reflectionToString(request.getHeaderNames()));
-        if (OPTIONS.equalsIgnoreCase(request.getMethod()) || !requestURI.contains(AUTH_PATH)
-                || !requestURI.contains(LOGOUT_URI) ) {
+        //log.info("==> getHeaderNames: {}", ToStringBuilder.reflectionToString(request.getHeaderNames()));
+        if (OPTIONS.equalsIgnoreCase(request.getMethod()) || !requestURI.contains(AUTH_PATH) || !requestURI.contains(LOGOUT_URI) ) {
             return;
         }
         String authHeader = RequestBaseUtils.getAuthHeader(request);

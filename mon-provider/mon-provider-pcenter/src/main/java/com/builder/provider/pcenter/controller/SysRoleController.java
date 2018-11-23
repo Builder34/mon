@@ -3,7 +3,7 @@ package com.builder.provider.pcenter.controller;
 import com.builder.provider.api.pcenter.entity.SysRoleEntity;
 import com.builder.common.utils.PageUtils;
 import com.builder.common.utils.R;
-import com.builder.provider.pcenter.controller.BaseController;
+import com.builder.common.core.BaseController;
 import com.builder.provider.pcenter.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
