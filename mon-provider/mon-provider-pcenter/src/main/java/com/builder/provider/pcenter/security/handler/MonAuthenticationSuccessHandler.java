@@ -1,12 +1,19 @@
 package com.builder.provider.pcenter.security.handler;
 
 import com.builder.common.base.constant.GlobalConstant;
+import com.builder.common.core.dto.LoginAuthDto;
 import com.builder.common.core.security.RequestAuthUtils;
-import com.builder.common.utils.JacksonUtil;
+import com.builder.common.core.util.JacksonUtil;
 import com.builder.common.utils.R;
+import com.builder.common.core.util.RedisClientUtils;
+import com.builder.provider.pcenter.security.impl.MonUserDetails;
+import com.builder.provider.pcenter.security.properties.OAuth2ClientProperties;
+import com.builder.provider.pcenter.security.properties.SecurityProperties;
+import com.builder.common.core.util.RedisKeyGenerator;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -31,17 +38,22 @@ import java.io.IOException;
 @Slf4j
 @Component("monAuthenticationSuccessHandler")
 public class MonAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    private static final String BEARER_TOKEN_TYPE = "Basic ";
+    //认证类型
+    private static final String AUTHORIZATION_TOKEN_TYPE = "Basic ";
 
     @Resource
     private ClientDetailsService clientDetailsService;
     @Resource
     private AuthorizationServerTokenServices authorizationServerTokenServices;
+    @Autowired
+    private SecurityProperties securityProperties;
+    @Autowired
+    private RedisClientUtils redisClientUtils;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (header == null || !header.startsWith(BEARER_TOKEN_TYPE)) {
+        if (header == null || !header.startsWith(AUTHORIZATION_TOKEN_TYPE)) {
             throw new UnapprovedClientAuthenticationException("请求头中无client信息");
         }
         String[] tokens = RequestAuthUtils.extractAndDecodeHeader(header);
@@ -58,11 +70,19 @@ public class MonAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
         OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
         OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
         OAuth2AccessToken token = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
-        Object loginUser = authentication.getPrincipal();
+        MonUserDetails loginUser = (MonUserDetails)authentication.getPrincipal();
         log.info("==> 登录用户信息: {}", JacksonUtil.encode2(loginUser));
-        //TODO:记录用户登录日志
+        //保存用户登录信息到redis作为session登录用户
+        LoginAuthDto dto = new LoginAuthDto();
+        dto.setLoginName(loginUser.getUsername());
+        dto.setUserId(loginUser.getUserId());
+        dto.setUsername(loginUser.getUsername());
+        OAuth2ClientProperties prop = securityProperties.getOauth2().getClients()[0];
+        redisClientUtils.set(RedisKeyGenerator.getAccessTokenKey(token.getValue()), dto,
+                prop.getAccessTokenValidateSeconds());
+        //TODO:记录用户登录日志, 保存token信息到数据库
         response.setContentType(GlobalConstant.HTTP_RESPONSE_CONTENT_TYPE);
-        response.getWriter().write(JacksonUtil.encode2(R.ok().put("token", token)));
+        response.getWriter().write(JacksonUtil.encode2(R.ok().put("data", token.getValue())));
 
         log.info("认证通过，登录成功...");
     }

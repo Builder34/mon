@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.security.impl;
 
-import com.builder.common.utils.JacksonUtil;
+import com.builder.common.core.util.JacksonUtil;
 import com.builder.provider.api.pcenter.entity.SysUserEntity;
 import com.builder.provider.pcenter.service.SysMenuService;
 import com.builder.provider.pcenter.service.SysUserService;
@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

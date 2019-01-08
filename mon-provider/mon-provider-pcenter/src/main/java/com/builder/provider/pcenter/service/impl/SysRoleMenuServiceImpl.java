@@ -6,6 +6,9 @@ import com.builder.provider.pcenter.dao.SysRoleMenuDao;
 import com.builder.provider.pcenter.service.SysRoleMenuService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * @Description 角色与菜单对应关系管理 服务
@@ -15,4 +18,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuDao, SysRoleMenuEntity> implements SysRoleMenuService {
+    @Override
+    public void batchInsert(Map<String, Object> map) {
+        this.baseMapper.batchInsert(map);
+    }
+
+    @Override
+    public List<Long> getMenuIdList(Long roleId) {
+        return this.baseMapper.getMenuIdList(roleId);
+    }
 }

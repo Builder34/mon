@@ -17,9 +17,10 @@ public class LoginAuthDto {
     /**
      * 用户名称
      * */
-    private String userName;
+    private String username;
     /**
      * 用户登录名称
      * */
     private String loginName;
+
 }

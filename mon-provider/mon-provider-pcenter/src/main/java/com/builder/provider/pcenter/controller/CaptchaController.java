@@ -5,7 +5,7 @@ import com.builder.provider.pcenter.captcha.CaptchaProcessorHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -34,7 +34,7 @@ public class CaptchaController {
      *
      * @throws Exception the exception
      */
-    @PostMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+ "/{type}")
+    @RequestMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+ "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception{
         captchaProcessorHolder.findCaptchaProcess(type).create(new ServletWebRequest(request, response));
     }

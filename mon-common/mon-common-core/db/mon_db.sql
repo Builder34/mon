@@ -30,7 +30,7 @@ CREATE TABLE `sys_dept` (
   `parent_id` int(4) DEFAULT NULL COMMENT '上级部门ID，一级部门为0',
   `name` varchar(50) DEFAULT NULL COMMENT '部门名称',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
-  `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
+  `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `create_user_id` int(11) COMMENT '创建者ID',
@@ -124,14 +124,19 @@ INSERT INTO `sys_menu` VALUES (3, 0, '商品中心', '/wcenter', NULL, 0, 'ios-b
 INSERT INTO `sys_menu` VALUES (4, 0, '订单中心', '/ocenter', NULL, 0, 'ios-paper', 3, NOW(), NOW(), 1, 1, 0);
 INSERT INTO `sys_menu` VALUES (5, 0, '数据中心', '/dcenter', NULL, 0, 'ios-stats', 4, NOW(), NOW(), 1, 1, 0);
 INSERT INTO `sys_menu` VALUES (6, 1, '菜单管理', '/pcenter/menu', NULL, 1, 'md-paper', 0, NOW(), NOW(), 1, 1, 1);
-INSERT INTO `sys_menu` VALUES (7, 1, '角色管理', '/pcenter/role', NULL, 1, 'ios-shirt', 1, NOW(), NOW(), 1, 1, 1);
-INSERT INTO `sys_menu` VALUES (8, 1, '部门管理', '/pcenter/dept', NULL, 1, 'ios-cube', 2, NOW(), NOW(), 1, 1, 1);
+INSERT INTO `sys_menu` VALUES (7, 1, '部门管理', '/pcenter/dept', NULL, 1, 'ios-cube', 1, NOW(), NOW(), 1, 1, 1);
+INSERT INTO `sys_menu` VALUES (8, 1, '角色管理', '/pcenter/role', NULL, 1, 'ios-shirt', 2, NOW(), NOW(), 1, 1, 1);
 INSERT INTO `sys_menu` VALUES (9, 1, '系统用户管理', '/pcenter/sysuser', '', 1, 'ios-contact', 3, NOW(), NOW(), 1, 1, 1);
 INSERT INTO `sys_menu` VALUES (10, 9, '系统用户', '/pcenter/sysuser/user', NULL, 2, 'md-person-add', 0, NOW(), NOW(), 1, 1, 2);
 INSERT INTO `sys_menu` VALUES (11, 9, '权限设置', '/pcenter/sysuser/permit', NULL, 2, 'md-shuffle', 1, NOW(), NOW(), 1, 1, 2);
 INSERT INTO `sys_menu` VALUES (12, 1, '代码生成', '/pcenter/code', NULL, 1, 'md-hammer', 4, NOW(), NOW(), 1, 1, 1);
 
-INSERT INTO `sys_role` VALUES (1, '超级管理员', '拥有系统最高权限', NULL, NOW(), NOW(), 1, 1);
+INSERT INTO `sys_dept` VALUES (1, 0, '广州分公司', 0, 1, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_dept` VALUES (2, 0, '南京分公司', 1, 1, NOW(), NOW(), 1, 1, 0);
+INSERT INTO `sys_dept` VALUES (3, 1, '一级研发部', 0, 1, NOW(), NOW(), 1, 1, 1);
+
+
+INSERT INTO `sys_role` VALUES (1, '超级管理员', '拥有系统最高权限', 1, NOW(), NOW(), 1, 1);
 INSERT INTO `sys_user_role` VALUES (1, 1, 1, NOW(), NOW(), 1, 1);
 
 INSERT INTO `sys_role_menu` VALUES (1, 1, 1, NOW(), 1);
@@ -147,5 +152,6 @@ INSERT INTO `sys_role_menu` VALUES (10, 1, 10, NOW(), 1);
 INSERT INTO `sys_role_menu` VALUES (11, 1, 11, NOW(), 1);
 INSERT INTO `sys_role_menu` VALUES (12, 1, 12, NOW(), 1);
 
-INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `email`, `mobile`, `status`, `create_time`, `update_time`, `create_user_id`, `update_user_id`) VALUES ('1', 'admin', '9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d', 'YzcmCZNvbXocrsz9dm8e', 'lcbiao34@gmail.com', '13450399531', '1', NOW(), NOW(), 1, 1);
+INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `email`, `mobile`, `status`, `create_time`, `update_time`, `create_user_id`, `update_user_id`)
+VALUES ('1', 'luocb', '$2a$10$ajKNCQP1R9vlh8aML3LFqu6g8rNi2xQGIJxEWFW37VWZa4DFYTUri', '', 'lcbiao34@gmail.com', '13450399531', '1', NOW(), NOW(), 1, 1);
 COMMIT;

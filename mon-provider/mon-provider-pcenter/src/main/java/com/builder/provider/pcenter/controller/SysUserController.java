@@ -61,11 +61,13 @@ public class SysUserController extends BaseController {
 
     @RequestMapping("/add")
     public R add(@RequestBody SysUserEntity entity) {
+        entity.setCreateUserId(getCurrentUserId());
         return sysUserService.insertCustom(entity);
     }
 
     @RequestMapping("/modify")
     public R modify(@RequestBody SysUserEntity entity) {
+        entity.setUpdateUserId(getCurrentUserId());
         sysUserService.updateById(entity);
         return R.ok();
     }

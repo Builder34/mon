@@ -1,4 +1,4 @@
-package com.builder.common.utils;
+package com.builder.common.core.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
@@ -34,6 +34,10 @@ public class JacksonUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JacksonUtil.class);
 
     private static ObjectMapper objectMapper = new ObjectMapper();
+
+    public static ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
 
     /** 默认日期时间格式 */
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

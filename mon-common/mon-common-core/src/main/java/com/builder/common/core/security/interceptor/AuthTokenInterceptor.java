@@ -1,19 +1,23 @@
 package com.builder.common.core.security.interceptor;
 
+import com.builder.common.base.constant.GlobalConstant;
 import com.builder.common.base.constant.SecurityConstants;
 import com.builder.common.base.enums.MonErrorCodeEnum;
+import com.builder.common.base.utils.ThreadLocalMap;
+import com.builder.common.core.dto.LoginAuthDto;
 import com.builder.common.core.security.NoNeedAccessAuthentication;
+import com.builder.common.core.util.RedisClientUtils;
+import com.builder.common.core.util.RedisKeyGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -30,8 +34,8 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
 
     @Value("${mon.oauth2.jwtSigningKey}")
     private String jwtSigningKey;
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedisClientUtils redisClientUtils;
 
     private static final String OPTIONS = "OPTIONS";
     private static final String AUTH_PATH1 = "/auth";
@@ -55,11 +59,18 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
             log.info("==> preHandle - 添加了不需要认证注解的请求不走认证...");
             return true;
         }
-        String token = StringUtils.substringAfter(request.getHeader(HttpHeaders.AUTHORIZATION), SecurityConstants.BEARER_TOKEN_TYPE);
+        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String token = StringUtils.substringAfter(authHeader, SecurityConstants.BEARER_TOKEN_TYPE);
         log.info("==> perHandler - 权限拦截器. token={}", token);
         //TODO: 从redis中读取用户信息，并保持在本地线程Map
-        log.info("==> perHandler - 权限拦截器. loginUser={}", "");
-        return false;
+        LoginAuthDto dto = redisClientUtils.get(RedisKeyGenerator.getAccessTokenKey(token), LoginAuthDto.class);
+        if(dto == null) {
+            log.error("获取用户信息失败, 不允许操作");
+            return false;
+        }
+        log.info("==> perHandler - 权限拦截器. url= {}, loginUser={}", uri, dto);
+        ThreadLocalMap.put(GlobalConstant.Sys.TOKEN_AUTH_DTO, dto);
+        return true;
     }
 
     @Override
@@ -87,10 +98,13 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
     }
 
     private boolean isHaveAccess(Object handler) {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        Method method = handlerMethod.getMethod();
-        NoNeedAccessAuthentication responseBody = AnnotationUtils.findAnnotation(method, NoNeedAccessAuthentication.class);
+        if(handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            Method method = handlerMethod.getMethod();
+            NoNeedAccessAuthentication responseBody = AnnotationUtils.findAnnotation(method, NoNeedAccessAuthentication.class);
 
-        return responseBody != null;
+            return responseBody != null;
+        }
+        return false;
     }
 }

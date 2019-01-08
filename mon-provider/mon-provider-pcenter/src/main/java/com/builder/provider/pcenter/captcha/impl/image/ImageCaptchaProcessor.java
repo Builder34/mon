@@ -1,6 +1,6 @@
 package com.builder.provider.pcenter.captcha.impl.image;
 
-import com.builder.common.utils.JacksonUtil;
+import com.builder.common.core.util.JacksonUtil;
 import com.builder.common.utils.R;
 import com.builder.provider.pcenter.captcha.CaptchaGenerator;
 import com.builder.provider.pcenter.captcha.CaptchaRepository;

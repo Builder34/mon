@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.builder.provider.pcenter.dao.SysDeptDao">
+
+    <select id="getDeptFirstLevelList" resultType="com.builder.provider.api.pcenter.entity.SysDeptEntity">
+        SELECT sd.dept_id,sd.parent_id,(SELECT `name` FROM sys_dept WHERE dept_id=sd.parent_id) as parent_name,
+        sd.name,sd.status,sd.order_num,sd.layer,sd.create_time,sd.update_time,sd.create_user_id,sd.update_user_id
+        FROM sys_dept sd
+        WHERE sd.parent_id = 0
+        ORDER BY sd.order_num
+    </select>
+
+    <select id="getDeptListByParentId" resultType="com.builder.provider.api.pcenter.entity.SysDeptEntity">
+        SELECT sd.dept_id,sd.parent_id,(SELECT `name` FROM sys_dept WHERE dept_id=sd.parent_id) as parent_name,
+        sd.name,sd.status,sd.order_num,sd.layer,sd.create_time,sd.update_time,sd.create_user_id,sd.update_user_id
+        FROM sys_dept sd
+        WHERE sd.parent_id = #{parentId}
+        ORDER BY sd.order_num
+    </select>
+
+    <select id="getCurrentLayer" resultType="java.lang.Integer">
+        SELECT layer+1 FROM sys_dept WHERE dept_id=#{parentId}
+    </select>
+</mapper>

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description 角色entity
@@ -31,6 +32,14 @@ public class SysRoleEntity implements Serializable {
      * 部门id
      * */
     private Long deptId;
+    @TableField(exist=false)
+    private String deptName;
+    /**
+     * 权限菜单列表
+     * */
+    @TableField(exist=false)
+    private List<Long> menuIdList;
+
     /**
      * 创建时间
      * */
@@ -39,26 +48,26 @@ public class SysRoleEntity implements Serializable {
      * 更新时间
      * */
     private Date updateTime;
-    private Integer createUserId;
-    private Integer updateUserId;
+    private Long createUserId;
+    private Long updateUserId;
     @TableField(exist=false)
     private String createUserName;
     @TableField(exist=false)
     private String updateUserName;
 
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Integer getUpdateUserId() {
+    public Long getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Integer updateUserId) {
+    public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
     }
 
@@ -124,5 +133,21 @@ public class SysRoleEntity implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public List<Long> getMenuIdList() {
+        return menuIdList;
+    }
+
+    public void setMenuIdList(List<Long> menuIdList) {
+        this.menuIdList = menuIdList;
     }
 }

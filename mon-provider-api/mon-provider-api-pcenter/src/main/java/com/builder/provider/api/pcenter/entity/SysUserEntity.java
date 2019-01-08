@@ -91,17 +91,17 @@ public class SysUserEntity implements Serializable {
 	 */
     @TableField(exist = false)
 	private String deptName;
-    private Integer updateUserId;
+    private Long updateUserId;
     @TableField(exist=false)
     private String createUserName;
     @TableField(exist=false)
     private String updateUserName;
 
-    public Integer getUpdateUserId() {
+    public Long getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Integer updateUserId) {
+    public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
     }
 

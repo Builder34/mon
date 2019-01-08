@@ -45,21 +45,22 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 
     @Override
     public List<SysMenuEntity> getMenuList(Long userId, Long navMenuId) {
-        long startTime = System.currentTimeMillis();
         List<SysMenuEntity> moduleMenuList = userId == -1L ? super.baseMapper.getMenuListAll(navMenuId) : super.baseMapper.getMenuList(userId, navMenuId);
         getAllMenuList(moduleMenuList, userId);
-        long endTime = System.currentTimeMillis();
-        LOGGER.debug("======build menu tree, use time {} ms",(endTime - startTime));
+
         return moduleMenuList;
     }
 
     @Override
     public List<SysMenuEntity> getTreeList() {
+        long startTime = System.currentTimeMillis();
         List<SysMenuEntity> menuList = super.baseMapper.getNavMenuListAll();
         for(int i = 0 ; i<menuList.size() ; i++){
             SysMenuEntity menu = menuList.get(i);
             menu.setChildren(this.getMenuList(-1L, menu.getMenuId()));
         }
+        long endTime = System.currentTimeMillis();
+        LOGGER.debug("======build menu tree, use time {} ms",(endTime - startTime));
         return menuList;
     }
 

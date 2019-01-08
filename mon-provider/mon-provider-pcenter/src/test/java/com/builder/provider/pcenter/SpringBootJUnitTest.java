@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter;
 
-import com.builder.common.utils.JacksonUtil;
-import com.builder.common.utils.RedisClientUtils;
+import com.builder.common.core.util.JacksonUtil;
+import com.builder.common.core.util.RedisClientUtils;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -90,8 +90,8 @@ public class SysLoginController {
         return R.ok();
     }
 
-    @GetMapping("/test.do")
-    @NoNeedAccessAuthentication
+    @RequestMapping("/test.do")
+    //@NoNeedAccessAuthentication
     public String dc(){
         String services = "Services: " + discoveryClient.getServices();
         return services;

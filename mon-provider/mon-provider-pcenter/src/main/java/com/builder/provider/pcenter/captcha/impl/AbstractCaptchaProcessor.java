@@ -1,15 +1,10 @@
 package com.builder.provider.pcenter.captcha.impl;
 
 import com.builder.common.core.security.exception.CaptchaException;
-import com.builder.provider.pcenter.captcha.CaptchaRepository;
-import com.builder.provider.pcenter.captcha.CaptchaBean;
-import com.builder.provider.pcenter.captcha.CaptchaGenerator;
-import com.builder.provider.pcenter.captcha.CaptchaProcessor;
-import com.builder.provider.pcenter.captcha.CaptchaType;
+import com.builder.provider.pcenter.captcha.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -56,13 +51,15 @@ public abstract class AbstractCaptchaProcessor<C extends CaptchaBean> implements
     public void check(ServletWebRequest request) {
         CaptchaType type = getCaptchaType();
         //保存在redis的验证码bean
-        C captchaBeanInRedis = (C)captchaRepository.get(request, type);
+        C captchaBeanInRedis;
         //请求参数中的验证码值
         String captchaCodeInRequest;
         try {
+            captchaBeanInRedis = (C)captchaRepository.get(request, type);
             captchaCodeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), type.getParamNameOnValidate()+"Captcha");
-        } catch (ServletRequestBindingException e) {
-            throw new CaptchaException("获取验证码的值失败");
+        } catch (Exception e) {
+            log.error("==> get captcha form redis, error: {}",e.getMessage(), e);
+            throw new CaptchaException("获取会话中的验证码值失败");
         }
         if(StringUtils.isBlank(captchaCodeInRequest)) {
             throw new CaptchaException("验证码的值不能为空");

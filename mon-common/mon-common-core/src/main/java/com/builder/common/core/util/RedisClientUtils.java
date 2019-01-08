@@ -1,4 +1,4 @@
-package com.builder.common.utils;
+package com.builder.common.core.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;

@@ -1,7 +1,7 @@
 package com.builder.provider.pcenter.security.handler;
 
 import com.builder.common.base.constant.GlobalConstant;
-import com.builder.common.utils.JacksonUtil;
+import com.builder.common.core.util.JacksonUtil;
 import com.builder.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

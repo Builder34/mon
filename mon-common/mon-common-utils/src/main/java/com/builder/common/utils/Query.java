@@ -35,9 +35,11 @@ public class Query<T> extends LinkedHashMap<String, Object> {
         //分页参数
         if(params.get("current") != null){
             current = Integer.parseInt(params.get("current").toString());
+            params.remove("current");
         }
         if(params.get("size") != null){
             size = Integer.parseInt(params.get("size").toString());
+            params.remove("size");
         }
 
         this.put("offset", (current - 1) * size);

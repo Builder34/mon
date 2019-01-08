@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description 部门entity
@@ -23,6 +24,7 @@ public class SysDeptEntity implements Serializable {
      * 上级部门ID，一级部门为0
      * */
     private Long parentId;
+    private String parentName;
     /**
      * 部门名称
      * */
@@ -32,9 +34,9 @@ public class SysDeptEntity implements Serializable {
      * */
     private Integer orderNum;
     /**
-     * 是否删除  -1：已删除  0：正常
+     * 是否删除  0：禁用  1：正常
      * */
-    private Integer delFlag;
+    private Integer status;
     private Date createTime;
     private Date updateTime;
     private Integer createUserId;
@@ -43,6 +45,8 @@ public class SysDeptEntity implements Serializable {
     private String createUserName;
     @TableField(exist=false)
     private String updateUserName;
+    @TableField(exist = false)
+    private List<SysDeptEntity> children;
     /**
      * 标记该节点所在树的层级,从0开始
      * */
@@ -112,12 +116,12 @@ public class SysDeptEntity implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public Integer getDelFlag() {
-        return delFlag;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -142,5 +146,21 @@ public class SysDeptEntity implements Serializable {
 
     public void setLayer(Integer layer) {
         this.layer = layer;
+    }
+
+    public List<SysDeptEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysDeptEntity> children) {
+        this.children = children;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

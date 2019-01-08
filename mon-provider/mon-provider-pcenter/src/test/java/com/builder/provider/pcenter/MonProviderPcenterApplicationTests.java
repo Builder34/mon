@@ -1,8 +1,10 @@
 package com.builder.provider.pcenter;
 
+import com.builder.provider.api.pcenter.entity.SysDeptEntity;
 import com.builder.provider.api.pcenter.entity.SysMenuEntity;
-import com.builder.common.utils.JacksonUtil;
+import com.builder.common.core.util.JacksonUtil;
 import com.builder.common.utils.PageUtils;
+import com.builder.provider.pcenter.service.SysDeptService;
 import com.builder.provider.pcenter.service.SysMenuService;
 import com.builder.provider.pcenter.util.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +26,8 @@ public class MonProviderPcenterApplicationTests {
 
     @Autowired
     private SysMenuService sysMenuService;
+    @Autowired
+    private SysDeptService sysDeptService;
 
     @Test
     public void queryMenu() {
@@ -45,5 +49,11 @@ public class MonProviderPcenterApplicationTests {
         String instanceName = StringUtils.uncapitalize(className);
         LOGGER.info("capitalizeFully tableName:{}, to className: {}, to instanceName: {}",
                 tableName, className, instanceName);
+    }
+
+    @Test
+    public void queryDeptTreeList() {
+        List<SysDeptEntity> deptEntities = sysDeptService.getWholeTreeList();
+        LOGGER.info("==> 部门树 json: {}",JacksonUtil.encode2(deptEntities));
     }
 }

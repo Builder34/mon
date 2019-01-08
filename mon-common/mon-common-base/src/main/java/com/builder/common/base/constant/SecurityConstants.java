@@ -18,9 +18,9 @@ public interface SecurityConstants {
     String HEADER_LABEL_SPLIT = ",";
 
     /**
-     * token bearer
+     * token bearer 自定义token认证信息分割符
      * */
-    String BEARER_TOKEN_TYPE = "bearer ";
+    String BEARER_TOKEN_TYPE = "Bearer ";
 
     /**
      * 默认的处理验证码的url前缀

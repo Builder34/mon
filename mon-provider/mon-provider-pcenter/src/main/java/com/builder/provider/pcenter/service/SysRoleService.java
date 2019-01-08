@@ -1,7 +1,10 @@
 package com.builder.provider.pcenter.service;
 
-import com.builder.provider.api.pcenter.entity.SysRoleEntity;
+import com.builder.common.utils.PageUtils;
 import com.builder.common.utils.service.BaseService;
+import com.builder.provider.api.pcenter.entity.SysRoleEntity;
+
+import java.util.Map;
 
 /**
  * @Description SysRoleService
@@ -11,4 +14,10 @@ import com.builder.common.utils.service.BaseService;
  */
 public interface SysRoleService extends BaseService<SysRoleEntity> {
 
+    /**
+     * 关联表分页查询
+     * @param  params 参数
+     * @return  角色分页数据
+     * */
+    PageUtils queryJoinPage(Map<String, Object> params);
 }
